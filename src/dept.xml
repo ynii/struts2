@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+<!-- 
+					通配符
+					"Dept_addDept"
+					"Dept_delsteDept"
+					"Dept_updateDept"
+ -->
+<package name="dept" namespace="/dept" extends="struts-default" abstract="">
+
+	<action name="*_*" class="com.struts.controller.Action_{1}" method="{2}">
+	<result name="success_web_inf" type="dispatcher">/WEB-INF/{1}/success.jsp</result>
+	<result name="failed_web_inf" type="dispatcher">/WEB-INF/{1}/failed.jsp</result>
+	<result name="success" type="dispatcher">/success.jsp</result>
+	<result name="failed" type="dispatcher">/failed.jsp</result>
+	
+	</action>
+	
+	
+	
+</package>
+</struts>
