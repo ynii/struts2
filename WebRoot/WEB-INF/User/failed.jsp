@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>失败界面</title>
 <%
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/"+"struts2/";
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/"+"struts2"+request.getServletPath();
 %>
 ">
 </head>

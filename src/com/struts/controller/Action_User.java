@@ -1,17 +1,167 @@
 package com.struts.controller;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+import org.apache.struts2.interceptor.SessionAware;
+import org.apache.struts2.util.ServletContextAware;
+
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.inject.Container;
 import com.opensymphony.xwork2.util.ValueStack;
+import com.struts.model.ModelUser;
 
-public class Action_User extends ActionSupport{
+public class Action_User extends ActionSupport implements ModelDriven<ModelUser> ,ServletRequestAware,SessionAware,ServletContextAware,ServletResponseAware{
 
+	
+	/**
+	 * 通过实现接口获取四大域 对象
+	 * 
+	 */
+	private HttpServletResponse response;
+	private ServletContext application;
+	private HttpServletRequest request;
+	private Map<String, Object> session;
+	private String name;
+	private String sex;
+	private Integer age;
+	private ModelUser user = new ModelUser();//通过对象驱动
+	
+	/*
+	 * 通过实现 ModelDriver类 接口，进行模型驱动 取值
+	 */
+	@Override
+	public ModelUser getModel() {
+		return user;	
+	}
+	
+	
+	/*
+	 * 通过对象驱动 传值
+	 * public ModelUser getUser() {
+		return user;
+	}
+	public void setUser(ModelUser user) {
+		this.user = user;
+	}*/
+
+
+	public String a(){
+		System.out.println(user+"--进入A方法--模型toString--"+user.toString());
+		System.out.println("--属性驱动--name----   "+name);
+		System.out.println("--属性驱动----sex----    "+sex);
+		System.out.println("--属性驱动--age----   "+age);
+		System.out.println("--------@_@---------@_@---------@_@---------");
+		System.out.println("--进入A方法----");
+		System.out.println("--对象驱动--name----   "+user.getName());
+		System.out.println("---对象驱动---sex----    "+user.getSex());
+		System.out.println("--对象驱动--age----   "+user.getAge());
+		System.out.println("--------@_@---------@_@---------@_@---------");
+		System.out.println("--进入A方法----");
+		System.out.println("--模型驱动--name----   "+user.getName());
+		System.out.println("---模型驱动---sex----    "+user.getSex());
+		System.out.println("--模型驱动--age----   "+user.getAge());
+		
+		return "success";
+	}
+	
+	
+/*	
+ * 通过属性驱动传值 和对象没关系
+ * public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}*/
+
+	@Override
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	@Override
+	public void setServletContext(ServletContext application) {
+		this.application = application;
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+	
+	
+	
+	/**
+	 * 通过 ServletActionContext 类获取， request   response   application   session  pageContext;
+	 * @return
+	 */
+	public String qqq(){
+		HttpServletRequest request = ServletActionContext.getRequest();
+		ServletActionContext.getRequest().getSession().setAttribute("aaa", 500);
+		ServletActionContext.getRequest().setAttribute("aaaa", 555);
+		ServletActionContext.getServletContext().setAttribute("aaaaa", 900);
+		try {
+			ServletActionContext.getResponse().sendRedirect("aaa.jsp");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			ServletActionContext.getRequest().getRequestDispatcher("bbb.jsp").forward(ServletActionContext.getRequest(), ServletActionContext.getResponse());
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "success";
+	}
+	
+	/**
+	 * ------------------------------------------------------------------------------------
+	 * 
+	 * 
+	 *
+	 * @return
+	 */
 	public String addUser(){
 		System.out.println("--ActionUser---adduser-----");
 		int i = 2;
@@ -294,6 +444,9 @@ public class Action_User extends ActionSupport{
 		// TODO Auto-generated method stub
 		super.validate();
 	}
+	
+
+	
 
 	
 	
