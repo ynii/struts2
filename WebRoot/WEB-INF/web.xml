@@ -1,36 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>stryts2</display-name>
-  
-  
-  
-  <!-- 配置核心控制器 -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>struts2</display-name>
   <filter>
-  		<filter-name>struts</filter-name>
-  		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    <filter-name>struts</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
   </filter>
   <filter-mapping>
-  		<filter-name>struts</filter-name>
-  		<url-pattern>/*</url-pattern>
+    <filter-name>struts</filter-name>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
-  <!-- 配置字符集过滤器 -->
   <filter>
-  		<filter-name>character</filter-name>
-  		<filter-class>com.struts.filter.CharacterSet</filter-class>
+    <filter-name>character</filter-name>
+    <filter-class>com.struts.filter.CharacterSet</filter-class>
   </filter>
   <filter-mapping>
-  		<filter-name>character</filter-name>
-  		<url-pattern>/*</url-pattern>
+    <filter-name>character</filter-name>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
-  <!-- 配置监听器 -->
   <listener>
-  		<listener-class>com.struts.listener.SessionListener</listener-class>
+    <listener-class>com.struts.listener.SessionListener</listener-class>
   </listener>
-  
-  
-  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
